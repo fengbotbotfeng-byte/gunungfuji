@@ -1,0 +1,711 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#273c2f">
+<title>The Guardian Stone of Tadoy Village</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --ink: #26352b;
+  --green: #344b3a;
+  --gold: #b18a4b;
+  --paper: #f4ead5;
+  --paper2: #eee1c6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 10%, #53694f, #263a2e 45%, #14251d);
+  color: #e9e4d6;
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+header {
+  text-align: center;
+  padding: 25px 12px 10px;
+}
+
+.kicker {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #d6bd8b;
+}
+
+header h1 {
+  font: 600 clamp(22px, 5vw, 36px) "Cormorant Garamond", serif;
+  margin: 8px 0;
+}
+
+header p {
+  font-size: 12px;
+  color: #c8d0c1;
+}
+
+.stage {
+  width: min(94vw, 580px);
+  margin: 15px auto;
+  perspective: 1800px;
+}
+
+.book {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  max-height: 78vh;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 24px 22px rgba(0,0,0,.35));
+}
+
+.book::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background: linear-gradient(90deg,#6d512c,#d0ae72,#6a4a27);
+  z-index: 30;
+  border-radius: 5px 0 0 5px;
+}
+
+.leaf {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 850ms cubic-bezier(.22,.7,.16,1);
+  cursor: pointer;
+}
+
+.leaf.turned {
+  transform: rotateY(-180deg);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 4px 9px 9px 4px;
+}
+
+.front {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: inset 8px 0 15px rgba(80,54,28,.13);
+}
+
+.back {
+  transform: rotateY(180deg);
+  background: var(--paper2);
+  color: var(--ink);
+}
+
+.paper {
+  position: absolute;
+  inset: 0;
+  padding: 7% 8%;
+  overflow: auto;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.17),transparent 40%),
+    repeating-linear-gradient(0deg,transparent 0 27px,rgba(90,73,44,.025) 28px),
+    var(--paper);
+}
+
+.paper::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(158,123,65,.3);
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+
+.smallcaps {
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #8c7141;
+}
+
+h2 {
+  font: 600 clamp(28px,6vw,42px)/.98 "Cormorant Garamond",serif;
+  margin: 12px 0;
+  color: #344b3a;
+}
+
+h3 {
+  font: 600 24px "Cormorant Garamond",serif;
+  margin: 10px 0;
+  color: #344b3a;
+}
+
+p {
+  font: 400 clamp(12px,2vw,15px)/1.65 "DM Sans",sans-serif;
+  margin: 0 0 12px;
+  color: #354338;
+}
+
+.photo {
+  width: 100%;
+  max-height: 36%;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 5px solid #e2d2b4;
+  box-shadow: 0 5px 12px #6a543022;
+  margin: 8px 0 13px;
+}
+
+.rule {
+  height: 1px;
+  background: linear-gradient(90deg,transparent,#b5965d,transparent);
+  margin: 13px 0;
+}
+
+.cover,
+.cover .paper {
+  background: linear-gradient(160deg,#435b42,#263e30 55%,#172b21);
+  color: #f4ead5;
+}
+
+.cover .paper::after {
+  border: 1px solid rgba(211,181,120,.55);
+  inset: 20px;
+}
+
+.cover h2 { color: #f2e5c6; }
+.cover p { color: #d9d6c4; }
+.cover .smallcaps { color: #cbb27a; }
+
+.cover-art {
+  width: 100%;
+  height: 37%;
+  object-fit: cover;
+  border-radius: 3px;
+  margin: 15px 0;
+  border: 1px solid #b69a62;
+}
+
+.cover-footer {
+  position: absolute;
+  bottom: 8%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #d7c18e;
+}
+
+.identity {
+  margin-top: 18px;
+  padding: 13px;
+  border: 1px solid #c5aa75;
+  background: rgba(255,255,255,.22);
+}
+
+.identity div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px dashed #c4ad83;
+  font-size: 12px;
+}
+
+.identity div:last-child { border: 0; }
+.identity b { color: #344b3a; }
+
+.image-caption {
+  text-align: center;
+  font: italic 13px "Cormorant Garamond",serif;
+  color: #806b4a;
+}
+
+.page-number {
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font: 12px "Cormorant Garamond",serif;
+  color: #8e754a;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 15px 10px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: 1px solid #bca16b;
+  background: #e8d8b7;
+  color: #26382b;
+  padding: 10px 16px;
+  border-radius: 30px;
+  font: 600 12px "DM Sans";
+  cursor: pointer;
+}
+
+button:hover { background: #f5e8ca; }
+button:disabled { opacity: .35; }
+
+.counter {
+  font-size: 11px;
+  color: #d4c8a7;
+  min-width: 75px;
+  text-align: center;
+}
+
+.hint {
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #aebba9;
+  padding-bottom: 20px;
+}
+
+@media(max-width:480px) {
+  header { padding-top: 16px; }
+  .stage { width: 94vw; }
+  .paper { padding: 7% 7%; }
+  .paper::after { inset: 9px; }
+  .photo { max-height: 32%; }
+  p { line-height: 1.5; }
+  button { padding: 9px 13px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .leaf { transition-duration: 1ms; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="kicker">Folktale • Bolaang Mongondow</div>
+  <h1>The Guardian Stone of Tadoy Village</h1>
+  <p>A story about nature, unity, and gratitude</p>
+</header>
+
+<div class="stage">
+<div class="book" id="book">
+
+<!-- COVER -->
+<div class="leaf" style="z-index:6">
+<div class="face front cover">
+<div class="paper">
+<div class="inner">
+<div class="smallcaps">A Folktale from Tadoy</div>
+
+<h2>The Guardian<br>Stone</h2>
+
+<p style="font:italic 20px 'Cormorant Garamond'">
+of Tadoy Village
+</p>
+
+<img class="cover-art"
+src="https://files.catbox.moe/ntl6t9.jpg">
+
+<div class="rule"></div>
+
+<p style="text-align:center;letter-spacing:2px;font-size:10px">
+BOLAANG MONGONDOW • INDONESIA
+</p>
+
+<div class="cover-footer">TURN THE PAGE TO BEGIN</div>
+</div>
+</div>
+</div>
+
+<div class="face back">
+<div class="paper">
+<div class="inner">
+<div class="smallcaps">A story kept alive</div>
+<h3>Folktales remind us…</h3>
+
+<p>
+That the places we call home are cared for by the people who live there—through kindness, respect, and working together.
+</p>
+
+<img class="photo" src="https://files.catbox.moe/gyimib.jpg">
+
+<p class="image-caption">A glimpse of the land and its stories.</p>
+<div class="page-number">1</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- INTRODUCTION -->
+<div class="leaf" style="z-index:5">
+<div class="face front">
+<div class="paper">
+<div class="inner">
+
+<div class="smallcaps">Reader & storyteller</div>
+<h2 style="font-size:34px">This Book Belongs To</h2>
+
+<div class="identity">
+<div><span>Student</span><b>Muhammad Mahfudzi</b></div>
+<div><span>Class</span><b>XI-D</b></div>
+<div><span>Teacher</span><b>Diawaty Udang</b></div>
+</div>
+
+<div class="rule"></div>
+
+<h3>Introduction</h3>
+
+<p>
+Long ago, in a small village called Tadoy, Bolaang Mongondow, there lived a simple, friendly, and helpful community. The village was surrounded by lush trees, hills, and beautiful natural scenery. The villagers made their living from farming and always valued togetherness.
+</p>
+
+<p>
+It was said that near the forest not far from the village, there stood a large stone believed to be the guardian of the village.
+</p>
+
+<div class="page-number">2</div>
+</div>
+</div>
+</div>
+
+<div class="face back">
+<div class="paper">
+<div class="inner">
+
+<div class="smallcaps">Chapter I • The drought</div>
+<h2>The Dry Season</h2>
+
+<img class="photo" src="https://files.catbox.moe/fjdd4e.jpg">
+
+<p>
+Long ago, Tadoy Village experienced a very long dry season. The river began to dry up, crops withered, and the villagers struggled to find water for their daily needs.
+</p>
+
+<p>
+A young man named Togop felt sad seeing his village in such a condition. He decided to go into the forest to search for a source of water.
+</p>
+
+<div class="page-number">3</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- MOTHER'S ADVICE -->
+<div class="leaf" style="z-index:4">
+<div class="face front">
+<div class="paper">
+<div class="inner">
+
+<div class="smallcaps">Chapter II • A mother's advice</div>
+<h2>Into the Forest</h2>
+
+<img class="photo" src="https://files.catbox.moe/9ehm8x.jpg">
+
+<p>
+Before leaving, his mother reminded him not to harm nature and to always respect whatever he encountered in the forest.
+</p>
+
+<p>
+Togop listened carefully. He walked beneath the tall trees, searching patiently, while keeping his mother's words close to his heart.
+</p>
+
+<div class="page-number">4</div>
+</div>
+</div>
+</div>
+
+<div class="face back">
+<div class="paper">
+<div class="inner">
+
+<div class="smallcaps">Chapter III • The discovery</div>
+<h2>A Hidden Spring</h2>
+
+<img class="photo" src="https://files.catbox.moe/nc6s90.jpg">
+
+<p>
+Deep in the forest, Togop found a clear source of water flowing near a large stone. He was amazed and grateful. He hurried back to the village to tell everyone what he had discovered.
+</p>
+
+<p>
+The villagers were filled with hope. Together, they planned to bring the water safely to their homes and gardens.
+</p>
+
+<div class="page-number">5</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- WORKING TOGETHER -->
+<div class="leaf" style="z-index:3">
+<div class="face front">
+<div class="paper">
+<div class="inner">
+
+<div class="smallcaps">Chapter IV • Working together</div>
+<h2>Water for Everyone</h2>
+
+<img class="photo" src="https://files.catbox.moe/o1dh3f.jpg">
+
+<p>
+The people of Tadoy then worked together to build a simple channel to carry the water into their village. The gardens became fertile again, the plants grew green, and life slowly returned to normal.
+</p>
+
+<p>
+Everyone shared the work. Their cooperation made the village stronger and brought joy back to the community.
+</p>
+
+<div class="page-number">6</div>
+</div>
+</div>
+</div>
+
+<div class="face back">
+<div class="paper">
+<div class="inner">
+
+<div class="smallcaps">Chapter V • The guardian's message</div>
+<h2>A Voice in the Night</h2>
+
+<p>
+However, the mysterious voice was heard once more that night.
+</p>
+
+<blockquote style="font:italic 20px 'Cormorant Garamond';color:#536447;border-left:2px solid #b18a4b;padding-left:14px;margin:18px 4px">
+“Protect this source of water. Do not be greedy, do not destroy the forest, and never forget the importance of unity.”
+</blockquote>
+
+<p>
+From that day on, the people of Tadoy always protected the forest, cared for the water source, and helped one another. The large stone became a symbol of unity and a reminder that nature must be protected.
+</p>
+
+<div class="page-number">7</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CONCLUSION + BACK COVER -->
+<div class="leaf" style="z-index:2">
+<div class="face front">
+<div class="paper">
+<div class="inner">
+
+<div class="smallcaps">Conclusion</div>
+<h2>A Legacy of Unity</h2>
+
+<p>
+As time passed, the story of the Guardian Stone of Tadoy Village was passed down from generation to generation. The villagers believed that their village would continue to prosper as long as they lived in harmony and protected nature.
+</p>
+
+<p>
+This story teaches us that a village's greatest treasure is not only its land and crops, but also its unity, compassion, and gratitude to God.
+</p>
+
+<div class="rule"></div>
+
+<img class="photo" src="https://files.catbox.moe/ntl6t9.jpg">
+
+<p class="image-caption">
+May we always care for nature and each other.
+</p>
+
+<div class="page-number">8</div>
+</div>
+</div>
+</div>
+
+<div class="face back cover">
+<div class="paper">
+<div class="inner" style="text-align:center;padding-top:15%">
+
+<div class="smallcaps">The end</div>
+
+<h2 style="font-size:38px">
+Thank You<br>for Reading
+</h2>
+
+<div class="rule"></div>
+
+<p style="font:italic 20px 'Cormorant Garamond'">
+“Protect nature.<br>Keep unity alive.”
+</p>
+
+<p style="margin-top:28px;font-size:11px;letter-spacing:2px">
+A FOLKTALE OF TADOY VILLAGE
+</p>
+
+<div style="font-size:34px;margin-top:25px">❧</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="controls">
+<button id="prev">← Back</button>
+<div class="counter" id="counter">Cover</div>
+<button id="next">Next →</button>
+<button id="sound">🔊 Sound on</button>
+</div>
+
+<div class="hint">
+TAP THE BOOK • SWIPE • USE ← → KEYS
+</div>
+
+<script>
+(() => {
+const leaves = [...document.querySelectorAll('.leaf')];
+const next = document.getElementById('next');
+const prev = document.getElementById('prev');
+const counter = document.getElementById('counter');
+const soundBtn = document.getElementById('sound');
+const book = document.getElementById('book');
+
+let current = 0;
+let soundOn = true;
+let audioContext = null;
+
+function update() {
+  leaves.forEach((leaf, i) => {
+    leaf.classList.toggle('turned', i < current);
+    leaf.style.zIndex = i < current ? i + 1 : leaves.length - i;
+  });
+
+  prev.disabled = current === 0;
+  next.disabled = current === leaves.length;
+
+  counter.textContent =
+    current === 0 ? 'Cover' :
+    current === leaves.length ? 'The End' :
+    `Page ${current} / ${leaves.length}`;
+}
+
+function paperSound() {
+  if (!soundOn) return;
+
+  try {
+    audioContext = audioContext ||
+      new (window.AudioContext || window.webkitAudioContext)();
+
+    if (audioContext.state === 'suspended')
+      audioContext.resume();
+
+    const duration = 0.17;
+    const sampleRate = audioContext.sampleRate;
+    const buffer = audioContext.createBuffer(
+      1, Math.floor(sampleRate * duration), sampleRate
+    );
+
+    const data = buffer.getChannelData(0);
+
+    for (let i = 0; i < data.length; i++) {
+      const fade = 1 - i / data.length;
+      data[i] = (Math.random() * 2 - 1) * fade * fade;
+    }
+
+    const source = audioContext.createBufferSource();
+    source.buffer = buffer;
+
+    const filter = audioContext.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 1200;
+    filter.Q.value = 0.7;
+
+    const gain = audioContext.createGain();
+    gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      0.09, audioContext.currentTime + 0.015
+    );
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001, audioContext.currentTime + duration
+    );
+
+    source.connect(filter);
+    filter.connect(gain);
+    gain.connect(audioContext.destination);
+    source.start();
+
+  } catch (error) {}
+}
+
+function turn(direction) {
+  const target = current + direction;
+
+  if (target < 0 || target > leaves.length) return;
+
+  current = target;
+  paperSound();
+  update();
+}
+
+next.onclick = () => turn(1);
+prev.onclick = () => turn(-1);
+
+soundBtn.onclick = () => {
+  soundOn = !soundOn;
+  soundBtn.textContent = soundOn ? '🔊 Sound on' : '🔇 Sound off';
+};
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'PageDown') turn(1);
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') turn(-1);
+});
+
+let startX = 0;
+let startY = 0;
+
+book.addEventListener('touchstart', e => {
+  startX = e.changedTouches[0].clientX;
+  startY = e.changedTouches[0].clientY;
+}, {passive:true});
+
+book.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - startX;
+  const dy = e.changedTouches[0].clientY - startY;
+
+  if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+    turn(dx < 0 ? 1 : -1);
+  }
+}, {passive:true});
+
+book.addEventListener('click', e => {
+  if (e.target.closest('button')) return;
+
+  const rect = book.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+
+  if (x > rect.width * 0.62) turn(1);
+  else if (x < rect.width * 0.38) turn(-1);
+});
+
+update();
+})();
+</script>
+
+</body>
+</html>
