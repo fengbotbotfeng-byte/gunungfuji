@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,38 +21,42 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
   background: radial-gradient(ellipse at 50% 10%, #53694f, #263a2e 45%, #14251d);
   color: #e9e4d6;
   font-family: "DM Sans", sans-serif;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 header {
   text-align: center;
-  padding: 25px 12px 10px;
+  padding: 20px 12px 8px;
 }
 
 .kicker {
   font-size: 10px;
-  letter-spacing: 4px;
+  letter-spacing: 3.8px;
   text-transform: uppercase;
   color: #d6bd8b;
 }
 
 header h1 {
-  font: 600 clamp(22px, 5vw, 36px) "Cormorant Garamond", serif;
-  margin: 8px 0;
+  font: 600 clamp(21px, 4.7vw, 33px) "Cormorant Garamond", serif;
+  margin: 6px 0 4px;
 }
 
 header p {
   font-size: 12px;
   color: #c8d0c1;
+  margin: 0;
 }
 
 .stage {
-  width: min(94vw, 580px);
-  margin: 15px auto;
+  width: min(93vw, 515px);
+  margin: 10px auto;
   perspective: 1800px;
 }
 
@@ -61,9 +64,9 @@ header p {
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 4;
-  max-height: 78vh;
+  max-height: 73dvh;
   transform-style: preserve-3d;
-  filter: drop-shadow(0 24px 22px rgba(0,0,0,.35));
+  filter: drop-shadow(0 22px 21px rgba(0,0,0,.36));
 }
 
 .book::before {
@@ -72,7 +75,7 @@ header p {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 12px;
+  width: 11px;
   background: linear-gradient(90deg,#6d512c,#d0ae72,#6a4a27);
   z-index: 30;
   border-radius: 5px 0 0 5px;
@@ -114,8 +117,8 @@ header p {
 .paper {
   position: absolute;
   inset: 0;
-  padding: 7% 8%;
-  overflow: auto;
+  padding: 6.5% 7.8%;
+  overflow-y: auto;
   background:
     linear-gradient(135deg,rgba(255,255,255,.17),transparent 40%),
     repeating-linear-gradient(0deg,transparent 0 27px,rgba(90,73,44,.025) 28px),
@@ -125,7 +128,7 @@ header p {
 .paper::after {
   content: "";
   position: absolute;
-  inset: 12px;
+  inset: 11px;
   border: 1px solid rgba(158,123,65,.3);
   pointer-events: none;
 }
@@ -133,6 +136,7 @@ header p {
 .inner {
   position: relative;
   z-index: 1;
+  padding-bottom: 26px;
 }
 
 .smallcaps {
@@ -143,37 +147,39 @@ header p {
 }
 
 h2 {
-  font: 600 clamp(28px,6vw,42px)/.98 "Cormorant Garamond",serif;
-  margin: 12px 0;
+  font: 600 clamp(26px,5.4vw,38px)/.98 "Cormorant Garamond",serif;
+  margin: 10px 0 11px;
   color: #344b3a;
 }
 
 h3 {
-  font: 600 24px "Cormorant Garamond",serif;
-  margin: 10px 0;
+  font: 600 clamp(20px,4vw,23px) "Cormorant Garamond",serif;
+  margin: 9px 0 7px;
   color: #344b3a;
 }
 
 p {
-  font: 400 clamp(12px,2vw,15px)/1.65 "DM Sans",sans-serif;
-  margin: 0 0 12px;
+  font: 400 clamp(12.5px,1.85vw,14.5px)/1.6 "DM Sans",sans-serif;
+  margin: 0 0 11px;
   color: #354338;
 }
 
 .photo {
+  display: block;
   width: 100%;
-  max-height: 36%;
+  height: 185px;
+  max-height: 29vh;
   object-fit: cover;
   border-radius: 3px;
-  border: 5px solid #e2d2b4;
+  border: 4.5px solid #e2d2b4;
   box-shadow: 0 5px 12px #6a543022;
-  margin: 8px 0 13px;
+  margin: 8px 0 11px;
 }
 
 .rule {
   height: 1px;
   background: linear-gradient(90deg,transparent,#b5965d,transparent);
-  margin: 13px 0;
+  margin: 11px 0;
 }
 
 .cover,
@@ -184,7 +190,7 @@ p {
 
 .cover .paper::after {
   border: 1px solid rgba(211,181,120,.55);
-  inset: 20px;
+  inset: 18px;
 }
 
 .cover h2 { color: #f2e5c6; }
@@ -192,28 +198,30 @@ p {
 .cover .smallcaps { color: #cbb27a; }
 
 .cover-art {
+  display: block;
   width: 100%;
-  height: 37%;
+  height: 205px;
+  max-height: 32vh;
   object-fit: cover;
   border-radius: 3px;
-  margin: 15px 0;
+  margin: 13px 0;
   border: 1px solid #b69a62;
 }
 
 .cover-footer {
   position: absolute;
-  bottom: 8%;
+  bottom: 7%;
   left: 0;
   right: 0;
   text-align: center;
-  font-size: 10px;
+  font-size: 9.5px;
   letter-spacing: 2px;
   color: #d7c18e;
 }
 
 .identity {
-  margin-top: 18px;
-  padding: 13px;
+  margin-top: 14px;
+  padding: 11px 13px;
   border: 1px solid #c5aa75;
   background: rgba(255,255,255,.22);
 }
@@ -222,7 +230,7 @@ p {
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  padding: 7px 0;
+  padding: 6px 0;
   border-bottom: 1px dashed #c4ad83;
   font-size: 12px;
 }
@@ -232,13 +240,14 @@ p {
 
 .image-caption {
   text-align: center;
-  font: italic 13px "Cormorant Garamond",serif;
+  font: italic 12.5px "Cormorant Garamond",serif;
   color: #806b4a;
+  margin-bottom: 4px;
 }
 
 .page-number {
   position: absolute;
-  bottom: 5%;
+  bottom: 4%;
   left: 0;
   right: 0;
   text-align: center;
@@ -251,7 +260,7 @@ p {
   align-items: center;
   justify-content: center;
   gap: 9px;
-  padding: 15px 10px;
+  padding: 12px 10px 8px;
   flex-wrap: wrap;
 }
 
@@ -259,7 +268,7 @@ button {
   border: 1px solid #bca16b;
   background: #e8d8b7;
   color: #26382b;
-  padding: 10px 16px;
+  padding: 9px 15px;
   border-radius: 30px;
   font: 600 12px "DM Sans";
   cursor: pointer;
@@ -280,17 +289,18 @@ button:disabled { opacity: .35; }
   font-size: 10px;
   letter-spacing: 1px;
   color: #aebba9;
-  padding-bottom: 20px;
+  padding-bottom: 16px;
 }
 
 @media(max-width:480px) {
-  header { padding-top: 16px; }
-  .stage { width: 94vw; }
-  .paper { padding: 7% 7%; }
-  .paper::after { inset: 9px; }
-  .photo { max-height: 32%; }
-  p { line-height: 1.5; }
-  button { padding: 9px 13px; }
+  header { padding-top: 14px; }
+  .stage { width: 93vw; }
+  .paper { padding: 6.5% 7.2%; }
+  .paper::after { inset: 8.5px; }
+  .photo { height: 155px; }
+  .cover-art { height: 175px; }
+  p { line-height: 1.54; }
+  button { padding: 8.5px 14px; }
 }
 
 @media(prefers-reduced-motion:reduce) {
@@ -319,12 +329,12 @@ button:disabled { opacity: .35; }
 
 <h2>The Guardian<br>Stone</h2>
 
-<p style="font:italic 20px 'Cormorant Garamond'">
+<p style="font:italic 19px 'Cormorant Garamond'">
 of Tadoy Village
 </p>
 
 <img class="cover-art"
-src="https://files.catbox.moe/ntl6t9.jpg">
+src="https://raw.githubusercontent.com/fengbotbotfeng-byte/urlgambar5/main/IMG-20261124-WA9811.jpg">
 
 <div class="rule"></div>
 
@@ -347,7 +357,7 @@ BOLAANG MONGONDOW • INDONESIA
 That the places we call home are cared for by the people who live there—through kindness, respect, and working together.
 </p>
 
-<img class="photo" src="https://files.catbox.moe/gyimib.jpg">
+<img class="photo" src="https://raw.githubusercontent.com/fengbotbotfeng-byte/urlgambar5/main/IMG-20261124-WA9295.jpg">
 
 <p class="image-caption">A glimpse of the land and its stories.</p>
 <div class="page-number">1</div>
@@ -363,7 +373,7 @@ That the places we call home are cared for by the people who live there—throug
 <div class="inner">
 
 <div class="smallcaps">Reader & storyteller</div>
-<h2 style="font-size:34px">This Book Belongs To</h2>
+<h2 style="font-size:31px">This Book Belongs To</h2>
 
 <div class="identity">
 <div><span>Student</span><b>Muhammad Mahfudzi</b></div>
@@ -396,7 +406,7 @@ It was said that near the forest not far from the village, there stood a large s
 <div class="smallcaps">Chapter I • The drought</div>
 <h2>The Dry Season</h2>
 
-<img class="photo" src="https://files.catbox.moe/fjdd4e.jpg">
+<img class="photo" src="https://raw.githubusercontent.com/fengbotbotfeng-byte/urlgambar5/main/IMG-20261124-WA7237.jpg">
 
 <p>
 Long ago, Tadoy Village experienced a very long dry season. The river began to dry up, crops withered, and the villagers struggled to find water for their daily needs.
@@ -421,7 +431,7 @@ A young man named Togop felt sad seeing his village in such a condition. He deci
 <div class="smallcaps">Chapter II • A mother's advice</div>
 <h2>Into the Forest</h2>
 
-<img class="photo" src="https://files.catbox.moe/9ehm8x.jpg">
+<img class="photo" src="https://raw.githubusercontent.com/fengbotbotfeng-byte/urlgambar5/main/IMG-20261124-WA5060.jpg">
 
 <p>
 Before leaving, his mother reminded him not to harm nature and to always respect whatever he encountered in the forest.
@@ -443,7 +453,7 @@ Togop listened carefully. He walked beneath the tall trees, searching patiently,
 <div class="smallcaps">Chapter III • The discovery</div>
 <h2>A Hidden Spring</h2>
 
-<img class="photo" src="https://files.catbox.moe/nc6s90.jpg">
+<img class="photo" src="https://raw.githubusercontent.com/fengbotbotfeng-byte/urlgambar5/main/IMG-20261124-WA5014.jpg">
 
 <p>
 Deep in the forest, Togop found a clear source of water flowing near a large stone. He was amazed and grateful. He hurried back to the village to tell everyone what he had discovered.
@@ -468,7 +478,7 @@ The villagers were filled with hope. Together, they planned to bring the water s
 <div class="smallcaps">Chapter IV • Working together</div>
 <h2>Water for Everyone</h2>
 
-<img class="photo" src="https://files.catbox.moe/o1dh3f.jpg">
+<img class="photo" src="https://raw.githubusercontent.com/fengbotbotfeng-byte/urlgambar5/main/IMG-20261124-WA9295.jpg">
 
 <p>
 The people of Tadoy then worked together to build a simple channel to carry the water into their village. The gardens became fertile again, the plants grew green, and life slowly returned to normal.
@@ -494,7 +504,7 @@ Everyone shared the work. Their cooperation made the village stronger and brough
 However, the mysterious voice was heard once more that night.
 </p>
 
-<blockquote style="font:italic 20px 'Cormorant Garamond';color:#536447;border-left:2px solid #b18a4b;padding-left:14px;margin:18px 4px">
+<blockquote style="font:italic 19px 'Cormorant Garamond';color:#536447;border-left:2px solid #b18a4b;padding-left:14px;margin:17px 4px">
 “Protect this source of water. Do not be greedy, do not destroy the forest, and never forget the importance of unity.”
 </blockquote>
 
@@ -527,7 +537,7 @@ This story teaches us that a village's greatest treasure is not only its land an
 
 <div class="rule"></div>
 
-<img class="photo" src="https://files.catbox.moe/nc6s90.jpg">
+<img class="photo" src="https://raw.githubusercontent.com/fengbotbotfeng-byte/urlgambar5/main/IMG-20261124-WA7237.jpg">
 
 <p class="image-caption">
 May we always care for nature and each other.
@@ -544,21 +554,21 @@ May we always care for nature and each other.
 
 <div class="smallcaps">The end</div>
 
-<h2 style="font-size:38px">
+<h2 style="font-size:35px">
 Thank You<br>for Reading
 </h2>
 
 <div class="rule"></div>
 
-<p style="font:italic 20px 'Cormorant Garamond'">
+<p style="font:italic 19px 'Cormorant Garamond'">
 “Protect nature.<br>Keep unity alive.”
 </p>
 
-<p style="margin-top:28px;font-size:11px;letter-spacing:2px">
+<p style="margin-top:26px;font-size:10.5px;letter-spacing:2px">
 A FOLKTALE OF TADOY VILLAGE
 </p>
 
-<div style="font-size:34px;margin-top:25px">❧</div>
+<div style="font-size:32px;margin-top:22px">❧</div>
 </div>
 </div>
 </div>
